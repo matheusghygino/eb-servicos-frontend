@@ -1,0 +1,64 @@
+---
+import logoEbServicos from '../assets/logo.png';
+
+const links = [
+  { href: '#inicio', label: 'Início' },
+  { href: '#servicos', label: 'Serviços' },
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#diferenciais', label: 'Diferenciais' },
+  { href: '#orcamento', label: 'Orçamento' },
+];
+---
+
+<header id="site-header" class="fixed left-0 top-0 z-50 w-full transition-all duration-300" data-header>
+  <div class="container-page py-4">
+    <nav class="flex items-center justify-between rounded-[28px] border border-transparent px-2 py-2 transition-all duration-300" aria-label="Menu principal" data-header-shell>
+      <a href="#inicio" class="flex items-center gap-3" aria-label="EB Serviços - início">
+        <span class="relative grid size-12 place-items-center overflow-hidden rounded-2xl bg-white shadow-soft">
+          <img src={logoEbServicos.src} alt="Logo EB Serviços" width="48" height="48" class="size-full object-contain p-1" />
+        </span>
+        <span class="leading-tight">
+          <strong class="block text-lg font-black tracking-tight text-text">EB Serviços</strong>
+          <span class="block text-xs font-bold uppercase tracking-[0.16em] text-muted">Limpeza profissional</span>
+        </span>
+      </a>
+
+      <div class="hidden items-center gap-7 lg:flex">
+        {links.map((link) => (
+          <a class="text-sm font-bold text-text/80 transition hover:text-primary" href={link.href}>{link.label}</a>
+        ))}
+      </div>
+
+      <a href="#orcamento" class="btn-primary hidden lg:inline-flex">Solicitar orçamento</a>
+
+      <button class="group relative z-50 grid size-12 place-items-center rounded-2xl border border-border bg-white/90 lg:hidden" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-toggle>
+        <span class="relative h-5 w-6">
+          <span class="absolute left-0 top-0 h-0.5 w-6 rounded-full bg-primary transition group-aria-expanded:top-2 group-aria-expanded:rotate-45"></span>
+          <span class="absolute left-0 top-2 h-0.5 w-6 rounded-full bg-primary transition group-aria-expanded:opacity-0"></span>
+          <span class="absolute left-0 top-4 h-0.5 w-6 rounded-full bg-primary transition group-aria-expanded:top-2 group-aria-expanded:-rotate-45"></span>
+        </span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="pointer-events-none fixed inset-0 z-40 bg-primary-dark/18 opacity-0 backdrop-blur-sm transition lg:hidden" data-menu-backdrop></div>
+  <div class="fixed right-4 top-4 z-40 w-[calc(100%-32px)] translate-y-[-120%] rounded-[32px] border border-border bg-white p-6 shadow-2xl transition duration-300 lg:hidden sm:max-w-sm sm:right-6" data-mobile-menu>
+    <div class="mb-8 flex items-center gap-3 pr-14">
+      <span class="relative grid size-12 place-items-center overflow-hidden rounded-2xl bg-white shadow-soft">
+        <img src={logoEbServicos.src} alt="Logo EB Serviços" width="48" height="48" class="size-full object-contain p-1" />
+      </span>
+      <div>
+        <strong class="block text-lg font-black text-text">EB Serviços</strong>
+        <span class="text-sm font-semibold text-muted">Brasília - DF</span>
+      </div>
+    </div>
+    <div class="grid gap-3">
+      {links.map((link) => (
+        <a class="rounded-2xl bg-background px-4 py-4 font-extrabold text-text transition hover:bg-accent/15 hover:text-primary" href={link.href} data-menu-link>{link.label}</a>
+      ))}
+    </div>
+    <a href="#orcamento" class="btn-secondary mt-6 w-full" data-menu-link>Falar com a EB Serviços</a>
+  </div>
+</header>
+
+<script src="../scripts/headerScroll.js"></script>

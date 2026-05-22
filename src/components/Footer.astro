@@ -1,0 +1,63 @@
+---
+import logoEbServicos from '../assets/logo.png';
+
+const year = new Date().getFullYear();
+const quickLinks = [
+  { href: '#inicio', label: 'Início' },
+  { href: '#servicos', label: 'Serviços' },
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#orcamento', label: 'Orçamento' },
+];
+const services = ['Residencial', 'Comercial', 'Pós-construção', 'Eventos'];
+---
+
+<footer class="bg-primary-dark text-white">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.2fr_0.7fr_0.8fr_0.8fr]">
+    <div>
+      <a href="#inicio" class="flex items-center gap-3">
+        <span class="relative grid size-12 place-items-center overflow-hidden rounded-2xl bg-white shadow-soft">
+          <img src={logoEbServicos.src} alt="Logo EB Serviços" width="48" height="48" class="size-full object-contain p-1" />
+        </span>
+        <span>
+          <strong class="block text-xl font-black">EB Serviços</strong>
+          <span class="text-sm font-semibold text-white/70">Limpeza profissional em Brasília</span>
+        </span>
+      </a>
+      <p class="mt-5 max-w-sm leading-7 text-white/72">Soluções de limpeza para residências, empresas, obras e eventos, com foco em agilidade, organização e qualidade.</p>
+    </div>
+
+    <div>
+      <h3 class="font-black">Links rápidos</h3>
+      <div class="mt-4 grid gap-3 text-white/72">
+        {quickLinks.map((link) => <a class="transition hover:text-white" href={link.href}>{link.label}</a>)}
+      </div>
+    </div>
+
+    <div>
+      <h3 class="font-black">Serviços</h3>
+      <div class="mt-4 grid gap-3 text-white/72">
+        {services.map((service) => <span>{service}</span>)}
+      </div>
+    </div>
+
+    <div>
+      <h3 class="font-black">Contato</h3>
+      <div class="mt-4 grid gap-3 text-white/72">
+        <span>Brasília - DF</span>
+        <span>WhatsApp: em breve</span>
+        <span>E-mail: contato@ebservicos.com.br</span>
+      </div>
+      <div class="mt-5 flex gap-3">
+        <a class="grid size-10 place-items-center rounded-full bg-white/10 font-black transition hover:bg-white hover:text-primary" href="#" aria-label="Instagram">Ig</a>
+        <a class="grid size-10 place-items-center rounded-full bg-white/10 font-black transition hover:bg-white hover:text-primary" href="#" aria-label="Facebook">Fb</a>
+        <a class="grid size-10 place-items-center rounded-full bg-white/10 font-black transition hover:bg-white hover:text-primary" href="#" aria-label="WhatsApp">Wa</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5">
+    <div class="container-page flex flex-col gap-3 text-sm font-semibold text-white/64 sm:flex-row sm:items-center sm:justify-between">
+      <span>© {year} EB Serviços. Todos os direitos reservados.</span>
+      <a class="transition hover:text-white" href="https://scalyns.com" target="_blank" rel="noopener noreferrer">Desenvolvido por Scalyns</a>
+    </div>
+  </div>
+</footer>

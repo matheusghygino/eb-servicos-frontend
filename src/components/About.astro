@@ -1,0 +1,40 @@
+---
+const stats = [
+  { value: '100%', label: 'Foco em qualidade' },
+  { value: 'DF', label: 'Atendimento local' },
+  { value: '24h', label: 'Retorno ágil' },
+];
+---
+
+<section id="sobre" class="section-padding relative overflow-hidden">
+  <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-white to-transparent"></div>
+  <div class="container-page grid items-center gap-12 lg:grid-cols-[0.92fr_1.08fr]">
+    <div class="relative">
+      <div class="rounded-[40px] border border-border bg-white p-5 shadow-soft">
+        <div class="rounded-[30px] bg-gradient-to-br from-accent/22 via-white to-secondary/18 p-8">
+          <div class="grid size-16 place-items-center rounded-3xl bg-primary text-3xl text-white">🧽</div>
+          <div class="mt-20 rounded-[28px] bg-white/82 p-6 shadow-soft backdrop-blur">
+            <span class="text-sm font-black uppercase tracking-[0.18em] text-primary">Organização e cuidado</span>
+            <h3 class="mt-3 text-3xl font-black tracking-[-0.04em] text-text">Ambientes limpos criam melhores experiências.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="eyebrow">Sobre a EB Serviços</span>
+      <h2 class="mt-5 text-4xl font-black tracking-[-0.04em] text-text sm:text-5xl">Uma empresa nova com atendimento próximo e execução cuidadosa</h2>
+      <p class="mt-6 text-lg leading-8 text-muted">
+        A EB Serviços nasceu para oferecer soluções de limpeza práticas, confiáveis e bem executadas em Brasília - DF. Atendemos residências, empresas, obras e eventos com foco em organização, cuidado nos detalhes e satisfação do cliente.
+      </p>
+      <div class="mt-9 grid gap-4 sm:grid-cols-3">
+        {stats.map((stat) => (
+          <div class="rounded-3xl border border-border bg-white p-5 shadow-soft">
+            <strong class="block text-3xl font-black text-primary">{stat.value}</strong>
+            <span class="mt-2 block text-sm font-bold text-muted">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

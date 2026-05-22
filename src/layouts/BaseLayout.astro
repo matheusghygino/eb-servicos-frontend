@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+
+const title = 'EB Serviços | Limpeza Profissional em Brasília - DF';
+const description = 'Serviços de limpeza residencial, comercial, profunda, pós-construção e eventos em Brasília - DF. Solicite um orçamento com a EB Serviços.';
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CleaningService',
+  name: 'EB Serviços',
+  description,
+  areaServed: {
+    '@type': 'City',
+    name: 'Brasília',
+    addressRegion: 'DF',
+    addressCountry: 'BR',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brasília',
+    addressRegion: 'DF',
+    addressCountry: 'BR',
+  },
+  url: canonical,
+  serviceType: [
+    'Limpeza residencial',
+    'Limpeza comercial',
+    'Limpeza profunda',
+    'Limpeza pós-construção',
+    'Limpeza de eventos',
+    'Serviços gerais de limpeza',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="EB Serviços" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#0057A8" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

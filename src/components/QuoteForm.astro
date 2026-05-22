@@ -1,0 +1,65 @@
+---
+const serviceOptions = [
+  'Limpeza residencial',
+  'Limpeza comercial',
+  'Limpeza profunda',
+  'Limpeza pós-construção',
+  'Limpeza de eventos',
+  'Limpeza recorrente',
+  'Limpeza sob demanda',
+  'Serviços gerais de limpeza',
+];
+---
+
+<section id="orcamento" class="section-padding">
+  <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div class="lg:sticky lg:top-28">
+      <span class="eyebrow">Orçamento</span>
+      <h2 class="mt-5 text-4xl font-black tracking-[-0.04em] text-text sm:text-5xl">Solicite seu orçamento sem compromisso</h2>
+      <p class="mt-5 text-lg leading-8 text-muted">Preencha os dados e informe o tipo de limpeza desejado. A equipe EB Serviços retornará com as próximas orientações.</p>
+      <div class="mt-8 rounded-[var(--radius-lg)] border border-border bg-white p-6 shadow-soft">
+        <strong class="block text-xl font-black text-text">Atendimento em Brasília - DF</strong>
+        <p class="mt-2 leading-7 text-muted">Serviços para residências, empresas, obras e eventos com contratação sob demanda ou recorrente.</p>
+      </div>
+    </div>
+
+    <form class="rounded-[32px] border border-border bg-white p-5 shadow-soft sm:p-8" data-quote-form novalidate>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="grid gap-2 font-bold text-text">
+          Nome *
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="name" type="text" autocomplete="name" required placeholder="Seu nome" />
+        </label>
+        <label class="grid gap-2 font-bold text-text">
+          Telefone / WhatsApp *
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="phone" type="tel" autocomplete="tel" required placeholder="(61) 99999-9999" data-phone-input />
+        </label>
+        <label class="grid gap-2 font-bold text-text">
+          E-mail
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="email" type="email" autocomplete="email" placeholder="voce@email.com" />
+        </label>
+        <label class="grid gap-2 font-bold text-text">
+          Tipo de serviço *
+          <select class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="service_type" required>
+            <option value="">Selecione</option>
+            {serviceOptions.map((option) => <option value={option}>{option}</option>)}
+          </select>
+        </label>
+        <label class="grid gap-2 font-bold text-text sm:col-span-2">
+          Região/Cidade *
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="region" type="text" required placeholder="Ex.: Águas Claras, Brasília - DF" />
+        </label>
+        <label class="grid gap-2 font-bold text-text sm:col-span-2">
+          Mensagem *
+          <textarea class="min-h-36 resize-y rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="message" required placeholder="Conte o que precisa limpar, frequência desejada e detalhes importantes."></textarea>
+        </label>
+      </div>
+      <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm font-semibold text-muted">Campos com * são obrigatórios.</p>
+        <button class="btn-primary" type="submit" data-submit-button>Enviar solicitação</button>
+      </div>
+      <p class="mt-5 hidden rounded-2xl px-4 py-3 text-sm font-bold" data-form-feedback role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script src="../scripts/quoteForm.js"></script>

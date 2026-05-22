@@ -1,0 +1,30 @@
+---
+const faqs = [
+  { question: 'A EB Serviços atende quais regiões?', answer: 'A EB Serviços atende Brasília - DF e pode avaliar demandas em regiões próximas conforme disponibilidade da equipe.' },
+  { question: 'Vocês fazem limpeza pós-obra?', answer: 'Sim. Realizamos limpeza pós-construção e pós-reforma para remover poeira, resíduos e preparar o ambiente para uso.' },
+  { question: 'Posso solicitar limpeza para empresa?', answer: 'Sim. Atendemos escritórios, lojas, clínicas e outros ambientes comerciais com limpeza pontual ou recorrente.' },
+  { question: 'Como funciona o orçamento?', answer: 'Você envia as informações pelo formulário, a equipe avalia a necessidade e retorna com orientações e estimativa de atendimento.' },
+  { question: 'Vocês atendem eventos?', answer: 'Sim. A EB Serviços pode apoiar a limpeza antes, durante ou depois de eventos sociais e corporativos.' },
+];
+---
+
+<section class="section-padding bg-white">
+  <div class="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+    <div>
+      <span class="eyebrow">FAQ</span>
+      <h2 class="mt-5 text-4xl font-black tracking-[-0.04em] text-text sm:text-5xl">Dúvidas frequentes</h2>
+      <p class="mt-5 text-lg leading-8 text-muted">Respostas rápidas para ajudar você a entender como contratar a EB Serviços.</p>
+    </div>
+    <div class="grid gap-4">
+      {faqs.map((faq) => (
+        <details class="group rounded-[var(--radius-lg)] border border-border bg-background p-6 shadow-soft">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black text-text">
+            {faq.question}
+            <span class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-primary transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-4 leading-7 text-muted">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
