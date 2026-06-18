@@ -1,9 +1,10 @@
-const WEBHOOK_URL = 'https://SEU_WEBHOOK_N8N_AQUI';
+const WEBHOOK_URL = 'https://n8n.scalyns.com/webhook/eb-servicos';
 
 const form = document.querySelector('[data-quote-form]');
 const feedback = document.querySelector('[data-form-feedback]');
 const submitButton = document.querySelector('[data-submit-button]');
 const phoneInput = document.querySelector('[data-phone-input]');
+const honeypotInput = document.querySelector('[data-honeypot]');
 
 function formatPhone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11);
@@ -35,12 +36,29 @@ form?.addEventListener('submit', async (event) => {
     return;
   }
 
+  if (honeypotInput?.value) {
+    form.reset();
+    window.turnstile?.reset();
+    showFeedback('Solicitação enviada com sucesso. Em breve a EB Serviços entrará em contato.', 'success');
+    return;
+  }
+
   const formData = new FormData(form);
   const payload = Object.fromEntries(formData.entries());
+  const turnstileToken = String(payload['cf-turnstile-response'] || '');
+
+  if (!turnstileToken) {
+    showFeedback('Confirme a verificação anti-spam antes de enviar.', 'error');
+    return;
+  }
+
+  delete payload.company_website;
+  delete payload['cf-turnstile-response'];
 
   payload.source = 'site-eb-servicos';
   payload.page = window.location.href;
   payload.submitted_at = new Date().toISOString();
+  payload.turnstile_token = turnstileToken;
 
   submitButton.disabled = true;
   submitButton.textContent = 'Enviando...';
@@ -58,6 +76,7 @@ form?.addEventListener('submit', async (event) => {
     if (!response.ok) throw new Error('Webhook returned an error');
 
     form.reset();
+    window.turnstile?.reset();
     showFeedback('Solicitação enviada com sucesso. Em breve a EB Serviços entrará em contato.', 'success');
   } catch (error) {
     showFeedback('Não foi possível enviar agora. Tente novamente em alguns instantes ou confira o webhook configurado.', 'error');
