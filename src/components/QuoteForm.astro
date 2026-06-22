@@ -1,7 +1,6 @@
 ---
-// Configurações
-const WORKER_URL = import.meta.env.PUBLIC_TURNSTILE_WORKER_URL || 'https://seu-worker.workers.dev';
-const N8N_WEBHOOK_URL = import.meta.env.PUBLIC_N8N_WEBHOOK_URL || 'https://seu-n8n.com/webhook/seu-endpoint';
+const N8N_WEBHOOK_URL = 'https://n8n.scalyns.com/webhook/eb-servicos';
+const TURNSTILE_SITE_KEY = '0x4AAAAAACBtETYrmppk61_g';
 
 const serviceOptions = [
   'Limpeza residencial',
@@ -27,13 +26,12 @@ const serviceOptions = [
       </div>
     </div>
 
-    <form 
-      class="rounded-[32px] border border-border bg-white p-5 shadow-soft sm:p-8" 
-      id="quote-form"
-      data-quote-form 
+    <form
+      class="rounded-[32px] border border-border bg-white p-5 shadow-soft sm:p-8"
+      data-quote-form
+      data-n8n-url={N8N_WEBHOOK_URL}
       novalidate
     >
-      <!-- Honeypot -->
       <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
         <label>
           Não preencha este campo
@@ -41,144 +39,133 @@ const serviceOptions = [
         </label>
       </div>
 
-      <!-- Campos do formulário -->
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="grid gap-2 font-bold text-text">
           Nome *
-          <input 
-            class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="name" 
-            type="text" 
-            autocomplete="name" 
-            required 
-            placeholder="Seu nome" 
-          />
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="name" type="text" autocomplete="name" required placeholder="Seu nome" />
         </label>
 
         <label class="grid gap-2 font-bold text-text">
           Telefone / WhatsApp *
-          <input 
-            class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="phone" 
-            type="tel" 
-            autocomplete="tel" 
-            required 
-            placeholder="(61) 99999-9999" 
-            data-phone-input 
-          />
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="phone" type="tel" autocomplete="tel" required placeholder="(61) 99999-9999" data-phone-input />
         </label>
 
         <label class="grid gap-2 font-bold text-text">
-          E-mail
-          <input 
-            class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="email" 
-            type="email" 
-            autocomplete="email" 
-            placeholder="voce@email.com" 
-          />
+          E-mail *
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="email" type="email" autocomplete="email" required placeholder="voce@email.com" />
         </label>
 
         <label class="grid gap-2 font-bold text-text">
-          Tipo de serviço *
-          <select 
-            class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="service_type" 
-            required
-          >
+          Tipo de serviço
+          <select class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="service_type">
             <option value="">Selecione</option>
             {serviceOptions.map((option) => <option value={option}>{option}</option>)}
           </select>
         </label>
 
         <label class="grid gap-2 font-bold text-text sm:col-span-2">
-          Região/Cidade *
-          <input 
-            class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="region" 
-            type="text" 
-            required 
-            placeholder="Ex.: Águas Claras, Brasília - DF" 
-          />
+          Endereço *
+          <input class="rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="address" type="text" required placeholder="Ex.: Águas Claras, Brasília - DF" />
         </label>
 
         <label class="grid gap-2 font-bold text-text sm:col-span-2">
-          Mensagem *
-          <textarea 
-            class="min-h-36 resize-y rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" 
-            name="message" 
-            required 
-            placeholder="Conte o que precisa limpar, frequência desejada e detalhes importantes."
-          ></textarea>
+          Mensagem
+          <textarea class="min-h-36 resize-y rounded-2xl border border-border bg-background px-4 py-4 font-medium outline-none transition focus:border-accent focus:ring-4 focus:ring-accent/15" name="message" placeholder="Conte o que precisa limpar, frequência desejada e detalhes importantes."></textarea>
         </label>
       </div>
 
-      <!-- Turnstile Widget -->
       <div class="mt-6 rounded-3xl border border-border bg-background p-4">
-        <div 
-          class="cf-turnstile" 
-          data-sitekey="0x4AAAAAACBtETYrmppk61_g" 
-          data-theme="light" 
+        <div
+          class="cf-turnstile"
+          data-sitekey={TURNSTILE_SITE_KEY}
+          data-theme="light"
           data-size="normal"
-          data-callback="onTurnstileSuccess"
-          data-error-callback="onTurnstileError"
-          data-expired-callback="onTurnstileExpired"
         ></div>
         <p class="mt-3 text-xs font-semibold text-muted">Proteção anti-spam por Cloudflare Turnstile.</p>
-        <!-- Campo oculto para o token (opcional, o Turnstile já cria automaticamente) -->
-        <input type="hidden" name="cf-turnstile-response" id="cf-turnstile-response" />
       </div>
 
       <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p class="text-sm font-semibold text-muted">Campos com * são obrigatórios.</p>
-        <button 
-          class="btn-primary relative" 
-          type="submit" 
-          data-submit-button
-        >
-          <span class="btn-text">Enviar solicitação</span>
-          <span class="btn-loader hidden">Enviando...</span>
-        </button>
+        <button class="btn-primary" type="submit" data-submit-button>Enviar solicitação</button>
       </div>
 
-      <p 
-        class="mt-5 hidden rounded-2xl px-4 py-3 text-sm font-bold" 
-        data-form-feedback 
-        role="status" 
-        aria-live="polite"
-      ></p>
+      <p class="mt-5 hidden rounded-2xl px-4 py-3 text-sm font-bold" data-form-feedback role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
 
-<!-- Scripts -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <script>
-  // Funções globais para callbacks do Turnstile
-  window.onTurnstileSuccess = function(token) {
-    // O token é automaticamente preenchido no campo cf-turnstile-response
-    document.getElementById('cf-turnstile-response').value = token;
-  };
+  const form = document.querySelector('[data-quote-form]');
+  const submitButton = document.querySelector('[data-submit-button]');
+  const feedback = document.querySelector('[data-form-feedback]');
 
-  window.onTurnstileError = function() {
-    const feedback = document.querySelector('[data-form-feedback]');
-    if (feedback) {
-      feedback.textContent = '❌ Erro no widget de segurança. Recarregue a página.';
-      feedback.className = 'rounded-2xl px-4 py-3 text-sm font-bold bg-red-50 text-red-700 border border-red-200';
-      feedback.classList.remove('hidden');
-    }
-  };
+  function showFeedback(message, type = 'error') {
+    if (!feedback) return;
 
-  window.onTurnstileExpired = function() {
-    const feedback = document.querySelector('[data-form-feedback]');
-    if (feedback) {
-      feedback.textContent = '⏳ Token expirado. Resolva o desafio novamente.';
-      feedback.className = 'rounded-2xl px-4 py-3 text-sm font-bold bg-yellow-50 text-yellow-700 border border-yellow-200';
-      feedback.classList.remove('hidden');
+    feedback.textContent = message;
+    feedback.classList.remove('hidden');
+
+    feedback.className =
+      type === 'success'
+        ? 'mt-5 rounded-2xl px-4 py-3 text-sm font-bold bg-green-50 text-green-700 border border-green-200'
+        : 'mt-5 rounded-2xl px-4 py-3 text-sm font-bold bg-red-50 text-red-700 border border-red-200';
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
     }
-  };
-</script>
-<script type="module">
-  // Importa o script do formulário como módulo
-  import './quoteForm.js';
+
+    const formData = new FormData(form);
+
+    if (formData.get('company_website')) {
+      return;
+    }
+
+    const turnstileToken = formData.get('cf-turnstile-response');
+
+    if (!turnstileToken) {
+      showFeedback('Confirme a verificação de segurança antes de enviar.');
+      return;
+    }
+
+    const n8nUrl = form.dataset.n8nUrl;
+
+    if (!n8nUrl) {
+      showFeedback('URL do n8n não configurada.');
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch(n8nUrl, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar formulário.');
+      }
+
+      form.reset();
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
+
+      showFeedback('Solicitação enviada com sucesso! Entraremos em contato em breve.', 'success');
+    } catch (error) {
+      showFeedback('Não foi possível enviar. Tente novamente.');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Enviar solicitação';
+    }
+  });
 </script>
